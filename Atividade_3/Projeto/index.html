@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Interativa - Compre headphones, smartwatches e notebooks com suporte a temas e carrinho dinâmico.">
+    <title>TechStore | Interativo</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo customizado do e-commerce -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Controle dinâmico da aplicação -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Banner de Relógio e Saudação Dinâmica -->
+    <div id="clockBanner" class="clock-banner" aria-live="polite">
+        <span class="greeting-container">
+            <i data-lucide="sun" id="greetingIcon"></i>
+            <span class="greeting-text">Olá! Seja bem-vindo(a) à TechStore</span>
+        </span>
+        <span class="datetime-container">
+            <i data-lucide="clock"></i>
+            <span class="datetime-text">Carregando data e hora...</span>
+        </span>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <nav id="navMenu" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="index.html#vitrine-title">Produtos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Alternador de tema (Light/Dark) -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cor">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+                
+                <!-- Carrinho de compras com badge -->
+                <button id="cartToggle" class="icon-btn" aria-label="Carrinho de compras" role="status">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </button>
+
+                <!-- Controle de navegação mobile -->
+                <button id="menuBtn" class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                    <i data-lucide="menu" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Vitrine de produtos -->
+    <main>
+        <!-- Barra de Pesquisa e Filtros -->
+        <section class="search-section" aria-label="Busca de produtos">
+            <div class="search-bar-container">
+                <div class="search-input-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar headphone, smartwatch, notebooks..." aria-label="Buscar produtos">
+                    <button id="clearSearchBtn" class="clear-search-btn" aria-label="Limpar busca" style="display: none;">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+            <span class="error-message search-error" id="searchError" aria-live="polite"></span>
+            
+            <!-- Indicador do Câmbio da API -->
+            <div id="exchangeRatePanel" class="exchange-rate-panel" style="display: none;">
+                <i data-lucide="trending-up"></i>
+                <span>Câmbio USD/BRL (AwesomeAPI): <strong id="exchangeRateVal">R$ 0,00</strong></span>
+            </div>
+        </section>
+
+        <section aria-labelledby="vitrine-title">
+            <h1 id="vitrine-title" class="section-title">Em Destaque <span>&bull;</span></h1>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Estado de carregamento dinâmico -->
+                <div class="loading-state-container" id="loadingState">
+                    <span class="loading-spinner"></span>
+                    <p>Obtendo catálogo da API pública...</p>
+                </div>
+            </div>
+
+            <!-- Controles de Paginação -->
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <button id="prevPageBtn" class="btn-pagination" aria-label="Página anterior">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div id="pageNumbers" class="page-numbers"></div>
+                <button id="nextPageBtn" class="btn-pagination" aria-label="Próxima página">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Mensagem de catálogo vazio (oculta por padrão) -->
+            <div id="emptyCatalogState" class="empty-catalog-state" style="display: none;">
+                <i data-lucide="search-code" style="width: 64px; height: 64px; opacity: 0.5; margin-bottom: 1rem;"></i>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Não encontramos nenhum produto que coincida com a sua pesquisa.</p>
+                <button id="resetSearchBtn" class="btn-buy" style="margin-top: 1.5rem;">Limpar Busca</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sacola de Compras Lateral (Drawer) -->
+    <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+    <div id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+        <div class="cart-drawer-header">
+            <h2 id="cartDrawerTitle">Sacola de Compras</h2>
+            <button id="closeCartBtn" class="icon-btn" aria-label="Fechar sacola">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div id="cartItemsContainer" class="cart-drawer-items">
+            <!-- Mensagem quando vazio -->
+            <div class="empty-cart-message">
+                <i data-lucide="shopping-bag" style="width: 48px; height: 48px; opacity: 0.5; margin-bottom: 1rem;"></i>
+                <p>Sua sacola está vazia no momento.</p>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cartTotalValue">R$ 0,00</span>
+            </div>
+            <button id="checkoutBtn" class="btn-buy" style="width: 100%; justify-content: center; margin-top: 1rem;" disabled>Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout Customizado -->
+    <div id="checkoutOverlay" class="modal-overlay" aria-hidden="true"></div>
+    <div id="checkoutModal" class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <h2 id="modalTitle">Resumo do Pedido</h2>
+            <button id="closeModalBtn" class="icon-btn" aria-label="Fechar modal">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Confira as informações da sua compra antes de prosseguir:</p>
+            <div id="modalReceipt" class="modal-receipt">
+                <!-- Itens e totais renderizados via JS -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelCheckout" class="btn-secondary">Cancelar</button>
+            <button id="confirmCheckout" class="btn-buy">Confirmar Compra</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

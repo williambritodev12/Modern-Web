@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio Digital - Premium</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Folha de estilo customizada -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Scripts de inicialização e controle do relógio -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Container principal do relógio -->
+    <main class="clock-container">
+        <div>
+            <!-- Display de data formatada -->
+            <div class="date" id="dateDisplay" aria-live="polite">Carregando data...</div>
+            <!-- Display de hora com suporte a leitor de telas (A11y) -->
+            <div class="time" id="timeDisplay" aria-live="polite" role="timer">00:00:00</div>
+        </div>
+        
+        <!-- Alternador de tema -->
+        <button id="themeBtn" class="theme-toggle" aria-label="Alternar tema de cor">
+            <i data-lucide="moon" id="themeIcon"></i>
+            <span id="themeText">Modo Escuro</span>
+        </button>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer">William Brito</a>.</p>
+    </footer>
+
+    <!-- Widget de Acessibilidade (VLibras) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

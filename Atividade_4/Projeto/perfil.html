@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - Painel do Cliente.">
+    <title>Minha Conta | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="profilePage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Conteúdo Principal do Painel -->
+    <main>
+        <section aria-labelledby="profile-heading">
+            <h1 id="profile-heading" class="section-title" style="text-align: left; margin-bottom: 2rem;">Minha Conta <span>&bull;</span></h1>
+            
+            <div class="profile-layout">
+                <!-- Sidebar com Opções do Painel -->
+                <aside class="profile-sidebar-card">
+                    <div class="profile-summary-header">
+                        <img id="profileAvatar" src="" alt="Avatar do Usuário" class="user-profile-large-avatar">
+                        <h3 id="profileName">Nome Usuário</h3>
+                        <p id="profileEmail">email@provedor.com</p>
+                        <span class="user-status-badge">Cliente Premium Gold</span>
+                    </div>
+                    <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                    
+                    <nav class="profile-tabs-nav" aria-label="Menu da conta">
+                        <button id="tabProfileDetails" class="profile-tab-btn active"><i data-lucide="user"></i> Meus Dados</button>
+                        <button id="tabOrderHistory" class="profile-tab-btn"><i data-lucide="package"></i> Histórico de Pedidos</button>
+                        <button id="tabAddresses" class="profile-tab-btn"><i data-lucide="map-pin"></i> Endereços salvos</button>
+                        <button id="logoutBtn" class="profile-tab-btn logout"><i data-lucide="log-out"></i> Sair da Conta</button>
+                    </nav>
+                </aside>
+
+                <!-- Área de Conteúdo das Abas -->
+                <article class="profile-content-card">
+                    <!-- Aba Meus Dados -->
+                    <div id="panelProfileDetails" class="profile-panel active">
+                        <h2>Dados Cadastrais</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Gerencie suas informações de conta de forma segura.</p>
+                        
+                        <form id="updateProfileForm" class="contact-form" style="gap: 1.25rem;">
+                            <div class="form-group">
+                                <label for="updateName">Nome Completo</label>
+                                <input type="text" id="updateName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateEmail">E-mail</label>
+                                <input type="email" id="updateEmail" readonly style="opacity: 0.7; cursor: not-allowed;" title="O e-mail não pode ser alterado">
+                            </div>
+                            <button type="submit" class="btn-buy" style="width: fit-content; padding: 0.8rem 2rem;">Salvar Alterações</button>
+                        </form>
+                    </div>
+
+                    <!-- Aba Histórico de Pedidos -->
+                    <div id="panelOrderHistory" class="profile-panel">
+                        <h2>Seus Pedidos</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Acompanhe o status e detalhes de suas compras anteriores.</p>
+                        
+                        <div id="ordersList" class="orders-list">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Aba Endereços -->
+                    <div id="panelAddresses" class="profile-panel">
+                        <h2>Endereços de Entrega</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Gerencie seus endereços para agilizar as compras no checkout.</p>
+                        
+                        <div id="addressesList" class="addresses-list" style="margin-bottom: 2rem;">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                        
+                        <h3 style="margin-bottom: 1rem; font-weight: 700; font-size: 1.1rem;">Adicionar Novo Endereço</h3>
+                        <form id="addAddressForm" class="contact-form" style="gap: 1.25rem;">
+                            <div class="form-group">
+                                <label for="newAddressInput">Endereço Completo</label>
+                                <input type="text" id="newAddressInput" placeholder="Rua, Número, Bairro, Cidade - UF" required>
+                            </div>
+                            <button type="submit" class="btn-buy" style="width: fit-content; padding: 0.8rem 2rem;">Adicionar Endereço</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

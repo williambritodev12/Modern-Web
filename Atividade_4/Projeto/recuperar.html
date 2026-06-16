@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - Recupere o acesso à sua conta.">
+    <title>Recuperação de Senha | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="recoveryPage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Conteúdo Principal de Recuperação -->
+    <main style="display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 250px); padding: 2rem 1rem;">
+        <article class="auth-card">
+            <div class="auth-header">
+                <h2>Recuperar Senha</h2>
+                <p>Insira seu e-mail cadastrado para redefinir sua credencial</p>
+            </div>
+            
+            <!-- Etapa 1: Enviar Email -->
+            <form id="recoveryStep1" class="contact-form active-panel">
+                <div class="form-group">
+                    <label for="recoveryEmail">E-mail Cadastrado</label>
+                    <input type="email" id="recoveryEmail" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem; margin-top: 0.5rem;">Enviar Código de Redefinição</button>
+            </form>
+
+            <!-- Etapa 2: Validar Código (injetado via JS) -->
+            <form id="recoveryStep2" class="contact-form" style="display: none;">
+                <p style="font-size: 0.85rem; color: var(--text-light); text-align: center; margin-bottom: 1rem;">
+                    Enviamos um código de verificação para o seu e-mail. Digite o código de 6 dígitos abaixo.
+                </p>
+                <div class="form-group">
+                    <label for="recoveryCode">Código de Segurança</label>
+                    <input type="text" id="recoveryCode" placeholder="123456" maxlength="6" style="text-align: center; font-size: 1.25rem; letter-spacing: 5px; font-weight: bold;" required>
+                </div>
+                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem; margin-top: 0.5rem;">Validar Código</button>
+            </form>
+
+            <!-- Etapa 3: Definir Nova Senha -->
+            <form id="recoveryStep3" class="contact-form" style="display: none;">
+                <div class="form-group">
+                    <label for="newPassword">Nova Senha</label>
+                    <input type="password" id="newPassword" placeholder="Mínimo 6 caracteres" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPasswordConfirm">Confirmar Nova Senha</label>
+                    <input type="password" id="newPasswordConfirm" placeholder="Confirme a nova senha" required>
+                </div>
+                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem; margin-top: 0.5rem;">Salvar Nova Senha</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Lembrou da senha? <a href="login.html" style="color: var(--primary); font-weight: 700;">Faça login</a></p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

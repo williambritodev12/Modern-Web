@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre a TechStore - Nossa missão, história e compromisso com a tecnologia.">
+    <title>Sobre Nós | TechStore</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo unificado -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- script de controle e interatividade -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Banner de Relógio e Saudação Dinâmica -->
+    <div id="clockBanner" class="clock-banner" aria-live="polite">
+        <span class="greeting-container">
+            <i data-lucide="sun" id="greetingIcon"></i>
+            <span class="greeting-text">Olá! Seja bem-vindo(a) à TechStore</span>
+        </span>
+        <span class="datetime-container">
+            <i data-lucide="clock"></i>
+            <span class="datetime-text">Carregando data e hora...</span>
+        </span>
+    </div>
+
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <nav id="navMenu" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#vitrine-title">Produtos</a></li>
+                    <li><a href="sobre.html" class="active">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Alternador de tema (Light/Dark) -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cor">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+                
+                <!-- Carrinho de compras com badge -->
+                <button id="cartToggle" class="icon-btn" aria-label="Carrinho de compras" role="status">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </button>
+
+                <!-- Controle de navegação mobile -->
+                <button id="menuBtn" class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                    <i data-lucide="menu" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section aria-labelledby="sobre-title">
+            <h1 id="sobre-title" class="section-title">Sobre a TechStore <span>&bull;</span></h1>
+            
+            <!-- Grid de informações institucionais -->
+            <div class="about-grid">
+                <article class="about-card hero-card">
+                    <h2>Quem Somos</h2>
+                    <p>Fundada em 2026, a <strong>TechStore</strong> nasceu com o propósito de aproximar as pessoas das soluções tecnológicas mais inovadoras e eficientes do mercado mundial. Nós selecionamos a dedo cada headphone, smartwatch e notebook do nosso catálogo, priorizando a combinação de alta performance, durabilidade e design sofisticado.</p>
+                    <p>Acreditamos que a tecnologia deve ser um fator de simplificação e inclusão. Por isso, todas as nossas plataformas de vendas são projetadas com foco estrito em usabilidade e acessibilidade digital.</p>
+                </article>
+
+                <aside class="about-stats-card">
+                    <div class="stat-item">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Clientes Satisfeitos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.8%</span>
+                        <span class="stat-label">Entregas no Prazo</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Suporte Dedicado</span>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Valores Institucionais -->
+            <h2 class="section-subtitle" style="text-align: center; margin: 4rem 0 2rem; font-size: 1.75rem; font-weight: 800;">Nossos Pilares</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="lightbulb"></i></div>
+                    <h3>Inovação</h3>
+                    <p>Buscamos constantemente novas soluções e produtos pioneiros para manter nossos clientes sempre à frente das tendências.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="handshake"></i></div>
+                    <h3>Transparência</h3>
+                    <p>Construímos relações de confiança mútua através de políticas claras, atendimento humanizado e honestidade.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="accessibility"></i></div>
+                    <h3>Inclusão (A11y)</h3>
+                    <p>Garantimos que nossas interfaces e produtos sejam compreensíveis e acessíveis para todas as pessoas, sem distinção.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sacola de Compras Lateral (Drawer) -->
+    <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+    <div id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+        <div class="cart-drawer-header">
+            <h2 id="cartDrawerTitle">Sacola de Compras</h2>
+            <button id="closeCartBtn" class="icon-btn" aria-label="Fechar sacola">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div id="cartItemsContainer" class="cart-drawer-items">
+            <!-- Renderizado dinamicamente via JS -->
+            <div class="empty-cart-message">
+                <i data-lucide="shopping-bag" style="width: 48px; height: 48px; opacity: 0.5; margin-bottom: 1rem;"></i>
+                <p>Sua sacola está vazia no momento.</p>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cartTotalValue">R$ 0,00</span>
+            </div>
+            <button id="checkoutBtn" class="btn-buy" style="width: 100%; justify-content: center; margin-top: 1rem;" disabled>Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout Customizado -->
+    <div id="checkoutOverlay" class="modal-overlay" aria-hidden="true"></div>
+    <div id="checkoutModal" class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <h2 id="modalTitle">Resumo do Pedido</h2>
+            <button id="closeModalBtn" class="icon-btn" aria-label="Fechar modal">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Confira as informações da sua compra antes de prosseguir:</p>
+            <div id="modalReceipt" class="modal-receipt">
+                <!-- Itens e totais renderizados via JS -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelCheckout" class="btn-secondary">Cancelar</button>
+            <button id="confirmCheckout" class="btn-buy">Confirmar Compra</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

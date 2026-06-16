@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - Faça login na sua conta.">
+    <title>Login | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="loginPage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Conteúdo Principal de Login -->
+    <main style="display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 250px); padding: 2rem 1rem;">
+        <article class="auth-card">
+            <div class="auth-header">
+                <h2>Acesse sua conta</h2>
+                <p>Insira suas credenciais para continuar comprando</p>
+            </div>
+            
+            <form id="loginForm" class="contact-form">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="loginPassword">Senha</label>
+                        <a href="recuperar.html" style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">Esqueceu a senha?</a>
+                    </div>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="password" id="loginPassword" placeholder="Digite sua senha" style="padding-right: 2.75rem;" required>
+                        <button type="button" id="toggleLoginPassword" class="icon-btn" style="position: absolute; right: 0.5rem; background: none; border: none; padding: 0.25rem; color: var(--text-light); height: auto;" aria-label="Mostrar senha">
+                            <i data-lucide="eye" style="width: 18px; height: 18px;"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem; margin-top: 0.5rem;">Entrar</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Não tem uma conta? <a href="cadastro.html" style="color: var(--primary); font-weight: 700;">Cadastre-se</a></p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

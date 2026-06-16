@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore - O seu e-commerce de tecnologia de alto padrão. Encontre headphones, smartwatches e notebooks.">
+    <title>TechStore | Premium E-commerce</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da aplicação -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Componentes de controle e navegação -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Controle de navegação mobile -->
+            <button id="menuBtn" class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                <i data-lucide="menu" id="menuIcon"></i>
+            </button>
+            <nav id="navMenu" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="index.html#vitrine-title">Produtos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Vitrine de Produtos -->
+    <main>
+        <section aria-labelledby="vitrine-title">
+            <h1 id="vitrine-title" class="section-title">Nossos Produtos</h1>
+            
+            <div class="products-grid">
+                
+                <!-- Produto: Headphone -->
+                <article class="product-card">
+                    <div class="product-img-wrapper" aria-hidden="true">
+                        <svg class="product-svg" viewBox="0 0 24 24">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-tag">Áudio</span>
+                        <h2 class="product-title">Headphone Noise Cancelling</h2>
+                        <p class="product-desc">Som imersivo com cancelamento de ruído ativo de última geração e bateria de longa duração para até 40 horas de reprodução contínua.</p>
+                        <div class="product-footer">
+                            <div class="price-container">
+                                <span class="price-label">Preço</span>
+                                <span class="product-price">R$ 899,00</span>
+                            </div>
+                            <button class="btn-buy" aria-label="Comprar Headphone Noise Cancelling">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produto: Smartwatch -->
+                <article class="product-card">
+                    <div class="product-img-wrapper" aria-hidden="true">
+                        <svg class="product-svg" viewBox="0 0 24 24">
+                            <rect x="6" y="6" width="12" height="12" rx="3"/>
+                            <path d="M12 2v4M12 18v4M9 12h6"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-tag">Wearables</span>
+                        <h2 class="product-title">Smartwatch Pro 5</h2>
+                        <p class="product-desc">Monitoramento cardíaco avançado, sensores de oxigênio, GPS integrado de alta precisão e resistência à água de até 50 metros.</p>
+                        <div class="product-footer">
+                            <div class="price-container">
+                                <span class="price-label">Preço</span>
+                                <span class="product-price">R$ 1.250,00</span>
+                            </div>
+                            <button class="btn-buy" aria-label="Comprar Smartwatch Pro 5">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produto: Notebook -->
+                <article class="product-card">
+                    <div class="product-img-wrapper" aria-hidden="true">
+                        <svg class="product-svg" viewBox="0 0 24 24">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="2" y1="20" x2="22" y2="20"/>
+                            <line x1="12" y1="17" x2="12" y2="20"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-tag">Computadores</span>
+                        <h2 class="product-title">Notebook Ultra Dev</h2>
+                        <p class="product-desc">Processador de última geração, 16GB RAM LPDDR5, SSD NVMe de 512GB e tela IPS de alta fidelidade de cores. Projetado para desenvolvedores.</p>
+                        <div class="product-footer">
+                            <div class="price-container">
+                                <span class="price-label">Preço</span>
+                                <span class="product-price">R$ 4.500,00</span>
+                            </div>
+                            <button class="btn-buy" aria-label="Comprar Notebook Ultra Dev">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 TechStore - Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+    </footer>
+
+    <!-- Widget de Acessibilidade (VLibras) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre a TechStore - Nossa missão, história e compromisso com a tecnologia.">
+    <title>Sobre Nós | TechStore</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Componentes de controle e navegação -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Controle de navegação mobile -->
+            <button id="menuBtn" class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                <i data-lucide="menu" id="menuIcon"></i>
+            </button>
+            <nav id="navMenu" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#vitrine-title">Produtos</a></li>
+                    <li><a href="sobre.html" class="active">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section aria-labelledby="sobre-title">
+            <h1 id="sobre-title" class="section-title">Sobre a TechStore</h1>
+            
+            <!-- Grid de informações institucionais -->
+            <div class="about-grid">
+                <article class="about-card hero-card">
+                    <h2>Quem Somos</h2>
+                    <p>Fundada em 2026, a <strong>TechStore</strong> nasceu com o propósito de aproximar as pessoas das soluções tecnológicas mais inovadoras e eficientes do mercado mundial. Nós selecionamos a dedo cada headphone, smartwatch e notebook do nosso catálogo, priorizando a combinação de alta performance, durabilidade e design sofisticado.</p>
+                    <p>Acreditamos que a tecnologia deve ser um fator de simplificação e inclusão. Por isso, todas as nossas plataformas de vendas são projetadas com foco estrito em usabilidade e acessibilidade digital.</p>
+                </article>
+
+                <aside class="about-stats-card">
+                    <div class="stat-item">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Clientes Satisfeitos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.8%</span>
+                        <span class="stat-label">Entregas no Prazo</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Suporte Dedicado</span>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Valores Institucionais -->
+            <h2 class="section-subtitle" style="text-align: center; margin: 4rem 0 2rem; font-size: 1.75rem; font-weight: 800;">Nossos Pilares</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="lightbulb"></i></div>
+                    <h3>Inovação</h3>
+                    <p>Buscamos constantemente novas soluções e produtos pioneiros para manter nossos clientes sempre à frente das tendências.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="handshake"></i></div>
+                    <h3>Transparência</h3>
+                    <p>Construímos relações de confiança mútua através de políticas claras, atendimento humanizado e honestidade.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i data-lucide="accessibility"></i></div>
+                    <h3>Inclusão (A11y)</h3>
+                    <p>Garantimos que nossas interfaces e produtos sejam compreensíveis e acessíveis para todas as pessoas, sem distinção.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 TechStore - Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+    </footer>
+
+    <!-- Widget de Acessibilidade (VLibras) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fale Conosco - Envie uma mensagem para a equipe TechStore.">
+    <title>Contato | TechStore</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo unificado -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- script de controle e interatividade -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Banner de Relógio e Saudação Dinâmica -->
+    <div id="clockBanner" class="clock-banner" aria-live="polite">
+        <span class="greeting-container">
+            <i data-lucide="sun" id="greetingIcon"></i>
+            <span class="greeting-text">Olá! Seja bem-vindo(a) à TechStore</span>
+        </span>
+        <span class="datetime-container">
+            <i data-lucide="clock"></i>
+            <span class="datetime-text">Carregando data e hora...</span>
+        </span>
+    </div>
+
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <nav id="navMenu" aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#vitrine-title">Produtos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html" class="active">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Alternador de tema (Light/Dark) -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cor">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+                
+                <!-- Carrinho de compras com badge -->
+                <button id="cartToggle" class="icon-btn" aria-label="Carrinho de compras" role="status">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </button>
+
+                <!-- Controle de navegação mobile -->
+                <button id="menuBtn" class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                    <i data-lucide="menu" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section aria-labelledby="contato-title">
+            <h1 id="contato-title" class="section-title">Fale Conosco <span>&bull;</span></h1>
+            
+            <!-- Grid de Contato -->
+            <div class="contact-grid">
+                
+                <!-- Formulário de Mensagem -->
+                <article class="contact-form-card">
+                    <h2>Envie sua Mensagem</h2>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Preencha os campos abaixo e entraremos em contato em até 24 horas úteis.</p>
+                    
+                    <form action="#" method="POST" id="contactForm" class="contact-form" novalidate>
+                        <!-- Campo Nome -->
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo (mínimo 3 caracteres)" required>
+                            <span class="error-message" id="nomeError" aria-live="polite"></span>
+                        </div>
+                        
+                        <!-- Campo E-mail -->
+                        <div class="form-group">
+                            <label for="email">E-mail Corporativo</label>
+                            <input type="email" id="email" name="email" placeholder="exemplo@empresa.com" required>
+                            <span class="error-message" id="emailError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Campo Assunto (Select Customizado) -->
+                        <div class="form-group">
+                            <label for="assunto">Assunto</label>
+                            <div class="custom-select-container" id="customSelect">
+                                <div class="select-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+                                    <span class="selected-value">Selecione o motivo do contato</span>
+                                    <i data-lucide="chevron-down"></i>
+                                </div>
+                                <div class="select-options" role="listbox">
+                                    <div class="select-option" role="option" data-value="suporte">Suporte Técnico</div>
+                                    <div class="select-option" role="option" data-value="vendas">Dúvidas sobre Vendas</div>
+                                    <div class="select-option" role="option" data-value="parcerias">Parcerias Comerciais</div>
+                                    <div class="select-option" role="option" data-value="outros">Outros Assuntos</div>
+                                </div>
+                                <!-- Input real oculto para submissão -->
+                                <input type="hidden" id="assunto" name="assunto" required>
+                            </div>
+                            <span class="error-message" id="assuntoError" aria-live="polite"></span>
+                        </div>
+                        
+                        <!-- Campo Mensagem -->
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva detalhadamente sua solicitação..." required></textarea>
+                            <span class="error-message" id="mensagemError" aria-live="polite"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem;">Enviar Mensagem</button>
+                    </form>
+                </article>
+
+                <!-- Informações de Atendimento -->
+                <aside class="contact-info-card">
+                    <h2>Canais de Atendimento</h2>
+                    
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                        <div class="info-text">
+                            <h3>Nossa Sede</h3>
+                            <p>Av. Paulista, 1000 - Bela Vista</p>
+                            <p>São Paulo - SP, CEP 01310-100</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="phone"></i></div>
+                        <div class="info-text">
+                            <h3>Telefones</h3>
+                            <p>Capitais: 4004-9000</p>
+                            <p>Demais Regiões: 0800-726-0000</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="mail"></i></div>
+                        <div class="info-text">
+                            <h3>E-mail</h3>
+                            <p>atendimento@techstore.com.br</p>
+                            <p>imprensa@techstore.com.br</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="clock"></i></div>
+                        <div class="info-text">
+                            <h3>Horário de Funcionamento</h3>
+                            <p>Segunda a Sexta: 08:00 às 18:00</p>
+                            <p>Sábado: 09:00 às 13:00</p>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Sacola de Compras Lateral (Drawer) -->
+    <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+    <div id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+        <div class="cart-drawer-header">
+            <h2 id="cartDrawerTitle">Sacola de Compras</h2>
+            <button id="closeCartBtn" class="icon-btn" aria-label="Fechar sacola">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div id="cartItemsContainer" class="cart-drawer-items">
+            <div class="empty-cart-message">
+                <i data-lucide="shopping-bag" style="width: 48px; height: 48px; opacity: 0.5; margin-bottom: 1rem;"></i>
+                <p>Sua sacola está vazia no momento.</p>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cartTotalValue">R$ 0,00</span>
+            </div>
+            <button id="checkoutBtn" class="btn-buy" style="width: 100%; justify-content: center; margin-top: 1rem;" disabled>Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout Customizado -->
+    <div id="checkoutOverlay" class="modal-overlay" aria-hidden="true"></div>
+    <div id="checkoutModal" class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <h2 id="modalTitle">Resumo do Pedido</h2>
+            <button id="closeModalBtn" class="icon-btn" aria-label="Fechar modal">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Confira as informações da sua compra antes de prosseguir:</p>
+            <div id="modalReceipt" class="modal-receipt"></div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelCheckout" class="btn-secondary">Cancelar</button>
+            <button id="confirmCheckout" class="btn-buy">Confirmar Compra</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

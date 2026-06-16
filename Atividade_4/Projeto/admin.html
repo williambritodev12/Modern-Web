@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - Painel do Administrador.">
+    <title>Painel Administrativo | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="adminPage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span> <span style="font-size: 0.8rem; background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 9999px; font-weight: bold; margin-left: 0.5rem; letter-spacing: 0.5px;">ADMIN</span>
+            </a>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+    
+    <!-- Conteúdo Principal do Painel -->
+    <main style="max-width: var(--max-width); margin: 2rem auto; padding: 0 2rem;">
+        <div class="admin-wrapper">
+            <!-- Menu Lateral do Painel Admin -->
+            <aside class="admin-sidebar" style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; height: fit-content; box-shadow: var(--shadow-sm);">
+                <div style="font-weight: 800; font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; padding: 0.5rem; margin-bottom: 0.5rem;">Navegação Admin</div>
+                <button class="admin-tab-btn active" data-tab="dashboard">
+                    <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Painel Geral
+                </button>
+                <button class="admin-tab-btn" data-tab="products">
+                    <i data-lucide="package" style="width: 18px; height: 18px;"></i> Gestão de Produtos
+                </button>
+                <button class="admin-tab-btn" data-tab="users">
+                    <i data-lucide="users" style="width: 18px; height: 18px;"></i> Gestão de Usuários
+                </button>
+                <button class="admin-tab-btn" data-tab="orders">
+                    <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i> Gestão de Compras
+                </button>
+                <button class="admin-tab-btn" data-tab="coupons">
+                    <i data-lucide="ticket" style="width: 18px; height: 18px;"></i> Gestão de Cupons
+                </button>
+                <button class="admin-tab-btn" data-tab="settings">
+                    <i data-lucide="settings" style="width: 18px; height: 18px;"></i> Configurações
+                </button>
+            </aside>
+            
+            <!-- Conteúdo Dinâmico das Abas -->
+            <div class="admin-content-area">
+                <h1 id="admin-heading" class="section-title" style="text-align: left; margin-bottom: 2rem; margin-top: 0;">Dashboard Administrativo</h1>
+                
+                <!-- Aba Dashboard -->
+                <div id="tab-dashboard" class="admin-tab-content active">
+                    <!-- Metricas Cards -->
+                    <div class="admin-metrics-grid">
+                        <article class="metric-card">
+                            <div class="metric-icon" style="background-color: #e0f2fe; color: #0284c7;"><i data-lucide="trending-up"></i></div>
+                            <div class="metric-info">
+                                <span class="metric-title">Faturamento Total</span>
+                                <h3 id="metricRevenue" class="metric-value">R$ 12.854,00</h3>
+                                <span class="metric-diff text-success">+12.5% vs mês anterior</span>
+                            </div>
+                        </article>
+                        
+                        <article class="metric-card">
+                            <div class="metric-icon" style="background-color: #dcfce7; color: #10b981;"><i data-lucide="shopping-bag"></i></div>
+                            <div class="metric-info">
+                                <span class="metric-title">Pedidos Finalizados</span>
+                                <h3 id="metricOrders" class="metric-value">0</h3>
+                                <span class="metric-diff text-success">Sincronizado local</span>
+                            </div>
+                        </article>
+        
+                        <article class="metric-card">
+                            <div class="metric-icon" style="background-color: #fef3c7; color: #d97706;"><i data-lucide="users"></i></div>
+                            <div class="metric-info">
+                                <span class="metric-title">Clientes Registrados</span>
+                                <h3 id="metricUsers" class="metric-value">Carregando...</h3>
+                                <span class="metric-diff">RandomUser + Local</span>
+                            </div>
+                        </article>
+        
+                        <article class="metric-card">
+                            <div class="metric-icon" style="background-color: #fee2e2; color: #ef4444;"><i data-lucide="dollar-sign"></i></div>
+                            <div class="metric-info">
+                                <span class="metric-title">Taxa de Câmbio USD</span>
+                                <h3 id="metricExchange" class="metric-value">R$ 5,40</h3>
+                                <span class="metric-diff">AwesomeAPI Live</span>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <!-- Dashboard Charts -->
+                    <article class="admin-card" style="margin-top: 2rem;">
+                        <h2>Desempenho de Vendas Mensais</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Visualização dos fluxos mensais (Simulado via CSS Bars)</p>
+                        
+                        <div class="sales-chart-container">
+                            <div class="chart-y-axis">
+                                <span>R$ 15k</span>
+                                <span>R$ 10k</span>
+                                <span>R$ 5k</span>
+                                <span>R$ 0</span>
+                            </div>
+                            <div class="chart-bars-wrapper">
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar" style="height: 40%;" title="Jan: R$ 4.200"><span class="chart-bar-value">R$ 4.2k</span></div>
+                                    <span class="chart-bar-label">Jan</span>
+                                </div>
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar" style="height: 55%;" title="Fev: R$ 6.100"><span class="chart-bar-value">R$ 6.1k</span></div>
+                                    <span class="chart-bar-label">Fev</span>
+                                </div>
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar" style="height: 70%;" title="Mar: R$ 8.900"><span class="chart-bar-value">R$ 8.9k</span></div>
+                                    <span class="chart-bar-label">Mar</span>
+                                </div>
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar" style="height: 50%;" title="Abr: R$ 5.500"><span class="chart-bar-value">R$ 5.5k</span></div>
+                                    <span class="chart-bar-label">Abr</span>
+                                </div>
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar" style="height: 85%;" title="Mai: R$ 12.800"><span class="chart-bar-value">R$ 12.8k</span></div>
+                                    <span class="chart-bar-label">Mai</span>
+                                </div>
+                                <div class="chart-bar-col">
+                                    <div class="chart-bar active" style="height: 95%;" title="Jun: R$ 14.500"><span class="chart-bar-value">R$ 14.5k</span></div>
+                                    <span class="chart-bar-label">Jun</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Aba Produtos -->
+                <div id="tab-products" class="admin-tab-content">
+                    <div class="admin-layout">
+                        <!-- Gerenciador de Inventário -->
+                        <article class="admin-card">
+                            <h2>Adicionar Novo Produto</h2>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Crie novos itens diretamente no catálogo do Fake Store API localmente.</p>
+                            
+                            <form id="addProductForm" class="contact-form" style="gap: 1.25rem;">
+                                <div class="form-group">
+                                    <label for="newProductTitle">Título do Produto</label>
+                                    <input type="text" id="newProductTitle" placeholder="Ex: Smartwatch Tech Premium" required>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label for="newProductPrice">Preço (USD)</label>
+                                        <input type="number" step="0.01" id="newProductPrice" placeholder="Ex: 99.99" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <div class="custom-select-container" id="adminCustomSelect">
+                                            <div class="select-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+                                                <span class="selected-value">Selecione a categoria</span>
+                                                <i data-lucide="chevron-down"></i>
+                                            </div>
+                                            <div class="select-options" role="listbox">
+                                                <div class="select-option" role="option" data-value="electronics">Eletrônicos</div>
+                                                <div class="select-option" role="option" data-value="jewelry">Joias / Acessórios</div>
+                                                <div class="select-option" role="option" data-value="men's clothing">Vestuário Masculino</div>
+                                                <div class="select-option" role="option" data-value="women's clothing">Vestuário Feminino</div>
+                                            </div>
+                                            <input type="hidden" id="newProductCategory" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newProductImage">URL da Imagem</label>
+                                    <input type="url" id="newProductImage" placeholder="https://images.unsplash.com/photo-..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newProductDesc">Descrição</label>
+                                    <textarea id="newProductDesc" rows="3" placeholder="Insira os detalhes do produto..." style="padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-color); color: var(--text-main); font-size: 0.95rem; outline: none; width: 100%; font-family: inherit;" required></textarea>
+                                </div>
+                                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem;"><i data-lucide="plus-circle"></i> Cadastrar no Inventário</button>
+                            </form>
+                        </article>
+                    </div>
+        
+                    <!-- Tabela de Inventário -->
+                    <article class="admin-card" style="margin-top: 2rem;">
+                        <h2>Inventário de Produtos Catalogados</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Gerencie os produtos ativos na loja virtual</p>
+                        
+                        <div class="table-container" style="overflow-x: auto;">
+                            <table class="compare-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%; text-align: center;">Visual</th>
+                                        <th style="width: 45%;">Nome do Produto</th>
+                                        <th style="width: 15%;">Categoria</th>
+                                        <th style="width: 15%; text-align: center;">Preço (USD)</th>
+                                        <th style="width: 15%; text-align: center;">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductsTable">
+                                    <!-- Injetado dinamicamente via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Aba Usuários -->
+                <div id="tab-users" class="admin-tab-content">
+                    <!-- Tabela de Clientes Registrados -->
+                    <article class="admin-card">
+                        <h2>Clientes Ativos na Base</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Visualização de usuários da API + cadastro local</p>
+                        
+                        <div class="table-container" style="overflow-x: auto;">
+                            <table class="compare-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%; text-align: center;">Avatar</th>
+                                        <th style="width: 40%;">Nome Completo</th>
+                                        <th style="width: 35%;">E-mail Cadastrado</th>
+                                        <th style="width: 15%; text-align: center;">Tipo de Conta</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminUsersTable">
+                                    <!-- Injetado dinamicamente via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Aba Compras / Pedidos -->
+                <div id="tab-orders" class="admin-tab-content">
+                    <article class="admin-card">
+                        <h2>Histórico de Pedidos Sincronizados</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Acompanhe em tempo real todas as vendas fechadas no e-commerce</p>
+                        
+                        <div class="table-container" style="overflow-x: auto;">
+                            <table class="compare-table" style="width: 100%; border-collapse: collapse; min-width: 750px;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 12%; text-align: center;">Código Pedido</th>
+                                        <th style="width: 12%; text-align: center;">Data da Venda</th>
+                                        <th style="width: 35%;">Itens Comprados</th>
+                                        <th style="width: 15%; text-align: center;">Método Pagto.</th>
+                                        <th style="width: 13%; text-align: center;">Total Pedido (BRL)</th>
+                                        <th style="width: 13%; text-align: center;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminOrdersTable">
+                                    <!-- Injetado dinamicamente via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Aba Cupons -->
+                <div id="tab-coupons" class="admin-tab-content">
+                    <div class="admin-layout" style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+                        <article class="admin-card">
+                            <h2>Criar Novo Cupom de Desconto</h2>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Crie novos cupons de desconto em percentual para serem aplicados no checkout.</p>
+                            
+                            <form id="addCouponForm" class="contact-form" style="gap: 1.25rem; display: flex; flex-direction: column;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label for="newCouponCode">Código do Cupom</label>
+                                        <input type="text" id="newCouponCode" placeholder="Ex: TECH10" style="text-transform: uppercase;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newCouponDiscount">Desconto (%)</label>
+                                        <input type="number" min="1" max="99" id="newCouponDiscount" placeholder="Ex: 10" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem;"><i data-lucide="plus-circle"></i> Cadastrar Cupom</button>
+                            </form>
+                        </article>
+
+                        <article class="admin-card">
+                            <h2>Cupons Cadastrados no Sistema</h2>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Gerencie os cupons de desconto ativos para compras</p>
+                            
+                            <div class="table-container" style="overflow-x: auto;">
+                                <table class="compare-table" style="width: 100%; border-collapse: collapse; min-width: 500px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 45%;">Código do Cupom</th>
+                                            <th style="width: 35%; text-align: center;">Desconto (%)</th>
+                                            <th style="width: 20%; text-align: center;">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminCouponsTable">
+                                        <!-- Injetado dinamicamente via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Aba Configurações -->
+                <div id="tab-settings" class="admin-tab-content">
+                    <article class="admin-card">
+                        <h2>Configurações Gerais da Loja</h2>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Ajuste as regras de negócio e a taxa de câmbio da TechStore.</p>
+                        
+                        <form id="storeSettingsForm" class="contact-form" style="gap: 1.25rem;">
+                            <div class="form-group">
+                                <label for="configStoreName">Nome da Loja Virtual</label>
+                                <input type="text" id="configStoreName" placeholder="Ex: TechStore Premium" required>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label for="configFreeShipping">Frete Grátis a partir de (R$)</label>
+                                    <input type="number" step="0.01" id="configFreeShipping" placeholder="Ex: 250.00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="configShippingFee">Taxa de Frete Padrão (R$)</label>
+                                    <input type="number" step="0.01" id="configShippingFee" placeholder="Ex: 20.00" required>
+                                </div>
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid var(--border); margin: 0.5rem 0;">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+                                <label style="font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" id="configExchangeOverride" style="width: auto; height: auto; margin-right: 0.25rem;">
+                                    Fixar Câmbio USD/BRL Manualmente (Ignorar AwesomeAPI)
+                                </label>
+                            </div>
+
+                            <div class="form-group" id="manualExchangeGroup" style="display: none;">
+                                <label for="configExchangeRate">Cotação Manual Dólar (R$)</label>
+                                <input type="number" step="0.01" id="configExchangeRate" placeholder="Ex: 5.50">
+                            </div>
+
+                            <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem;"><i data-lucide="save"></i> Salvar Configurações</button>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

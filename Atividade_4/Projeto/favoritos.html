@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - Sua lista de desejos e produtos favoritos salvos.">
+    <title>Favoritos | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="wishlistPage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Barra de pesquisa -->
+            <div class="search-container" aria-label="Buscar produtos">
+                <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar na lista...">
+            </div>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+
+                <!-- Lista de Desejos -->
+                <a href="favoritos.html" class="icon-btn" aria-label="Ver lista de desejos" title="Lista de Desejos" style="color: var(--primary);">
+                    <i data-lucide="heart" class="icon-filled" style="fill: var(--primary);"></i>
+                    <span id="wishlistBadge" class="cart-badge" style="background-color: #ef4444;">0</span>
+                </a>
+                
+                <!-- Carrinho de compras -->
+                <div class="cart-container">
+                    <button id="cartBtn" class="icon-btn" aria-label="Carrinho de compras">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cartBadge" class="cart-badge">0</span>
+                    </button>
+                    <!-- Caixa de Dropdown do Carrinho -->
+                    <div id="cartDropdown" class="cart-dropdown" role="region" aria-live="polite">
+                        <div class="cart-dropdown-header">
+                            <h4>Carrinho de Compras</h4>
+                        </div>
+                        <div id="cartItemsList" class="cart-items-list">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+                        <div class="cart-dropdown-footer">
+                            <div class="cart-total">Total: <span id="cartTotalValue">R$ 0,00</span></div>
+                            <button id="checkoutBtn" class="btn-primary" style="width: 100%; margin-top: 0.75rem;">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget de perfil do usuário -->
+                <div id="userProfile" class="user-profile" aria-label="Menu do usuário" aria-haspopup="true">
+                    <img id="userAvatar" src="" alt="Foto de perfil" class="user-avatar">
+                    <span id="userName" class="user-name">Carregando...</span>
+                    
+                    <!-- Menu dropdown do perfil -->
+                    <div id="profileDropdown" class="profile-dropdown" role="menu">
+                        <h4 id="dropdownName">Nome Usuário</h4>
+                        <p id="dropdownEmail">email@provedor.com</p>
+                        <hr>
+                        <a href="perfil.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="user" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Minha Conta</a>
+                        <a href="login.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="log-in" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Fazer Login</a>
+                        <a href="admin.html" style="font-size: 0.85rem; font-weight: 600; color: var(--accent); display: block; margin-bottom: 0.5rem;"><i data-lucide="shield" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Painel Admin</a>
+                        <hr style="margin: 0.5rem 0;">
+                        <a href="#" id="menuLogoutBtn" style="font-size: 0.85rem; font-weight: 600; color: #ef4444; display: block;"><i data-lucide="log-out" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Lista de Desejos -->
+    <main>
+        <section aria-labelledby="wishlist-heading">
+            <h1 id="wishlist-heading" class="section-title">Lista de Desejos <span>&bull;</span></h1>
+            
+            <!-- Grid dinâmico de favoritos -->
+            <div id="productsGrid" class="products-grid">
+                <!-- Injetado dinamicamente via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal overlay para Quick View -->
+    <div id="modalOverlay" class="modal-overlay" aria-modal="true" role="dialog">
+        <div id="modalContainer" class="modal-container">
+            <!-- Injetado dinamicamente via JS -->
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

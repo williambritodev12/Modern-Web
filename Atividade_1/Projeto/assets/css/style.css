@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+    --surface-color: rgba(255, 255, 255, 0.75);
+    --surface-border: rgba(255, 255, 255, 0.6);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15), 
+              0 8px 16px -8px rgba(0, 0, 0, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    --surface-color: rgba(15, 23, 42, 0.6);
+    --surface-border: rgba(255, 255, 255, 0.05);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #818cf8;
+    --primary-hover: #6366f1;
+    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: var(--transition);
+    overflow: hidden;
+    position: relative;
+    gap: 2rem;
+}
+
+footer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    z-index: 10;
+    transition: var(--transition);
+}
+
+footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Background decorativo (efeito Glassmorphism) */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    transition: var(--transition);
+}
+
+body::before {
+    width: 300px;
+    height: 300px;
+    background: rgba(99, 102, 241, 0.25);
+    top: 20%;
+    left: 25%;
+}
+
+body::after {
+    width: 250px;
+    height: 250px;
+    background: rgba(236, 72, 153, 0.2);
+    bottom: 20%;
+    right: 25%;
+}
+
+body.dark-mode::before {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+body.dark-mode::after {
+    background: rgba(236, 72, 153, 0.1);
+}
+
+/* Container principal do relógio */
+.clock-container {
+    background-color: var(--surface-color);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    padding: 3.5rem 4rem;
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 380px;
+    max-width: 90%;
+    position: relative;
+    z-index: 10;
+}
+
+.time {
+    font-size: 5.5rem;
+    font-weight: 700;
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition);
+}
+
+.date {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    text-transform: capitalize;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Botão de tema */
+.theme-toggle {
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.4);
+    transition: var(--transition);
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5);
+}
+
+.theme-toggle:active {
+    transform: translateY(-1px);
+}
+
+/* Animação de rotação para alteração de tema */
+.icon-spin {
+    animation: spin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg) scale(0.5); opacity: 0; }
+    100% { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+
+/* Responsividade móvel */
+@media (max-width: 480px) {
+    .clock-container {
+        padding: 2.5rem 2rem;
+        min-width: 280px;
+    }
+    .time {
+        font-size: 4rem;
+    }
+    .date {
+        font-size: 1.1rem;
+    }
+}

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore Premium API - O melhor e-commerce com cotações em tempo real, comparador, lista de desejos e controle de variantes.">
+    <title>TechStore API | Premium E-commerce</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="storePage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Barra de pesquisa -->
+            <div class="search-container" aria-label="Buscar produtos">
+                <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar na loja...">
+            </div>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+
+                <!-- Lista de Desejos -->
+                <a href="favoritos.html" class="icon-btn" aria-label="Ver lista de desejos" title="Lista de Desejos">
+                    <i data-lucide="heart"></i>
+                    <span id="wishlistBadge" class="cart-badge" style="background-color: #ef4444;">0</span>
+                </a>
+                
+                <!-- Carrinho de compras -->
+                <div class="cart-container">
+                    <button id="cartBtn" class="icon-btn" aria-label="Carrinho de compras">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cartBadge" class="cart-badge">0</span>
+                    </button>
+                    <!-- Caixa de Dropdown do Carrinho -->
+                    <div id="cartDropdown" class="cart-dropdown" role="region" aria-live="polite">
+                        <div class="cart-dropdown-header">
+                            <h4>Carrinho de Compras</h4>
+                        </div>
+                        <div id="cartItemsList" class="cart-items-list">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+                        <div class="cart-dropdown-footer">
+                            <div class="cart-total">Total: <span id="cartTotalValue">R$ 0,00</span></div>
+                            <button id="checkoutBtn" class="btn-primary" style="width: 100%; margin-top: 0.75rem;">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget de perfil do usuário -->
+                <div id="userProfile" class="user-profile" aria-label="Menu do usuário" aria-haspopup="true">
+                    <img id="userAvatar" src="" alt="Foto de perfil" class="user-avatar">
+                    <span id="userName" class="user-name">Carregando...</span>
+                    
+                    <!-- Menu dropdown do perfil -->
+                    <div id="profileDropdown" class="profile-dropdown" role="menu">
+                        <h4 id="dropdownName">Nome Usuário</h4>
+                        <p id="dropdownEmail">email@provedor.com</p>
+                        <hr>
+                        <a href="perfil.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="user" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Minha Conta</a>
+                        <a href="login.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="log-in" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Fazer Login</a>
+                        <a href="admin.html" style="font-size: 0.85rem; font-weight: 600; color: var(--accent); display: block; margin-bottom: 0.5rem;"><i data-lucide="shield" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Painel Admin</a>
+                        <hr style="margin: 0.5rem 0;">
+                        <a href="#" id="menuLogoutBtn" style="font-size: 0.85rem; font-weight: 600; color: #ef4444; display: block;"><i data-lucide="log-out" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link active">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Hero Banner Carousel -->
+    <section class="hero-carousel-container" aria-label="Banners Promocionais">
+        <div class="carousel-track-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Slide 1 -->
+                <article class="carousel-slide active" style="background: linear-gradient(135deg, #1e293b 0%, #0b0f19 100%); color: white;">
+                    <div class="slide-content">
+                        <span class="slide-tag">LANÇAMENTO EXCLUSIVO</span>
+                        <h2 class="slide-title">Super Phone 15 Pro</h2>
+                        <p class="slide-desc">Corpo em titânio aeroespacial, chip de última geração e sistema de câmera tripla profissional.</p>
+                        <a href="loja.html" class="btn-buy btn-carousel">Garanta o Seu <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="slide-graphics">
+                        <!-- Simulação visual do smartphone com gradiente e vidro -->
+                        <div class="mock-device-shape">
+                            <div class="mock-device-screen">
+                                <div class="mock-device-notch"></div>
+                                <div class="mock-device-wallpaper"></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!-- Slide 2 -->
+                <article class="carousel-slide" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white;">
+                    <div class="slide-content">
+                        <span class="slide-tag">OFERTAS DE INVERNO</span>
+                        <h2 class="slide-title">Estilo & Sofisticação</h2>
+                        <p class="slide-desc">Confira nossa coleção exclusiva de jaquetas e moletons premium com até 30% de desconto.</p>
+                        <a href="loja.html" class="btn-buy btn-carousel btn-carousel-alt">Ver Coleção <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="slide-graphics">
+                        <!-- Desenho abstrato da coleção com círculos concêntricos de vidro -->
+                        <div class="mock-jacket-shape">
+                            <div class="mock-glass-circle-1"></div>
+                            <div class="mock-glass-circle-2"></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!-- Controles do Carrossel -->
+        <button class="carousel-btn prev" id="carouselPrevBtn" aria-label="Slide anterior"><i data-lucide="chevron-left"></i></button>
+        <button class="carousel-btn next" id="carouselNextBtn" aria-label="Próximo slide"><i data-lucide="chevron-right"></i></button>
+        <!-- Indicadores -->
+        <div class="carousel-dots" id="carouselDots">
+            <span class="carousel-dot active" data-index="0"></span>
+            <span class="carousel-dot" data-index="1"></span>
+        </div>
+    </section>
+
+    <!-- Visual Categories Grid -->
+    <section class="categories-section" aria-labelledby="categories-heading">
+        <div class="categories-container">
+            <a href="loja.html?category=electronics" class="category-card" id="catElectronics" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
+                <div class="category-card-icon" style="color: #0284c7;"><i data-lucide="cpu"></i></div>
+                <h3>Eletrônicos</h3>
+                <p>Equipamentos de alta performance</p>
+            </a>
+            <a href="loja.html?category=jewelry" class="category-card" id="catJewelry" style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);">
+                <div class="category-card-icon" style="color: #ec4899;"><i data-lucide="gem"></i></div>
+                <h3>Joias & Acessórios</h3>
+                <p>Brilho e refinamento para você</p>
+            </a>
+            <a href="loja.html?category=clothing" class="category-card" id="catClothing" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+                <div class="category-card-icon" style="color: #10b981;"><i data-lucide="shirt"></i></div>
+                <h3>Vestuário</h3>
+                <p>Roupas masculinas e femininas</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Info Bar of Benefits -->
+    <section class="benefits-bar" aria-label="Benefícios da Loja">
+        <div class="benefits-container">
+            <div class="benefit-item">
+                <i data-lucide="truck"></i>
+                <div>
+                    <h4>Frete Grátis</h4>
+                    <p>Em compras acima de R$ 250</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i data-lucide="credit-card"></i>
+                <div>
+                    <h4>10x sem Juros</h4>
+                    <p>Em todos os cartões</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i data-lucide="shield-check"></i>
+                <div>
+                    <h4>Compra Segura</h4>
+                    <p>Segurança criptografada</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i data-lucide="rotate-ccw"></i>
+                <div>
+                    <h4>Troca Fácil</h4>
+                    <p>Até 30 dias para devolver</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas Relâmpago Section -->
+    <section class="flash-deals-section" aria-labelledby="flash-heading">
+        <div class="flash-header">
+            <h2 id="flash-heading" style="display: flex; align-items: center; gap: 0.5rem; margin: 0;"><i data-lucide="zap" style="color: #eab308; fill: #eab308;"></i> Ofertas Relâmpago</h2>
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                <div class="countdown-timer" id="countdownTimer">
+                    <span class="timer-label">Termina em:</span>
+                    <div class="timer-box" id="timerHours">00</div><span>:</span>
+                    <div class="timer-box" id="timerMinutes">00</div><span>:</span>
+                    <div class="timer-box" id="timerSeconds">00</div>
+                </div>
+                <div class="slider-controls" aria-label="Controles do slider de ofertas">
+                    <button class="slider-btn prev" id="flashPrevBtn" aria-label="Oferta anterior"><i data-lucide="chevron-left"></i></button>
+                    <button class="slider-btn next" id="flashNextBtn" aria-label="Próxima oferta"><i data-lucide="chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="flash-slider-container">
+            <div class="flash-products-grid" id="flashProductsGrid">
+                <!-- Injetado dinamicamente via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Vitrine de produtos -->
+    <main>
+        <section aria-labelledby="vitrine-heading">
+            <h1 id="vitrine-heading" class="section-title">Nossos Produtos <span>&bull;</span></h1>
+            
+            <!-- Grid dinâmico de produtos -->
+            <div id="productsGrid" class="products-grid">
+                <!-- Injetado dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- Brands Carousel Slider -->
+        <section class="brands-section" aria-label="Nossos Parceiros">
+            <div class="brands-carousel-container">
+                <div class="brands-track" id="brandsTrack">
+                    <div class="brand-logo">Apple</div>
+                    <div class="brand-logo">Samsung</div>
+                    <div class="brand-logo">Sony</div>
+                    <div class="brand-logo">Intel</div>
+                    <div class="brand-logo">Nike</div>
+                    <div class="brand-logo">Puma</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription Section -->
+        <section class="newsletter-section" aria-labelledby="newsletter-heading">
+            <div class="newsletter-container">
+                <h2 id="newsletter-heading">Fique por dentro das novidades</h2>
+                <p>Assine nossa newsletter e receba ofertas exclusivas, cupons de desconto e novidades em primeira mão.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" id="newsletterEmail" placeholder="Digite seu melhor e-mail" required>
+                    <button type="submit" class="btn-buy" style="border-radius: 9999px; padding: 0.8rem 2.5rem;">Inscrever-se</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Comparador de produtos -->
+    <div id="compareBar" class="compare-bar" aria-live="polite">
+        <div class="compare-header">
+            <h3>Comparador de Produtos</h3>
+            <span style="font-size: 0.8rem; color: var(--text-light)">Selecione 2 itens para confrontar especificações</span>
+        </div>
+        <div class="compare-grid">
+            <!-- Slots do comparador -->
+            <div id="compareSlot1" class="compare-slot">
+                <!-- Item 1 JS -->
+            </div>
+            <div id="compareSlot2" class="compare-slot">
+                <!-- Item 2 JS -->
+            </div>
+        </div>
+        <div class="compare-actions">
+            <button id="compareBtnAction" class="btn-compare-action" disabled>Comparar Especificações</button>
+        </div>
+    </div>
+
+    <!-- Modal overlay para Quick View e tabelas -->
+    <div id="modalOverlay" class="modal-overlay" aria-modal="true" role="dialog">
+        <div id="modalContainer" class="modal-container">
+            <!-- Injetado dinamicamente via JS -->
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fale Conosco - Envie uma mensagem para a equipe TechStore.">
+    <title>Contato | TechStore API</title>
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilo global da loja virtual -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lógica de programação do e-commerce -->
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body id="contatoPage">
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Top-bar / Banner de Saudação e Relógio -->
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div id="clockBanner" class="clock-banner" aria-live="polite">
+                    <span class="greeting-wrapper">
+                        <i data-lucide="sun" id="greetingIcon" class="greeting-icon"></i>
+                        <span id="greetingText">Olá</span>, seja bem-vindo(a) à TechStore!
+                    </span>
+                    <span id="clockText" class="clock-text">Carregando data e hora...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                Tech<span>Store</span>
+            </a>
+            
+            <!-- Painel de ações do usuário -->
+            <div class="header-actions">
+                <!-- Widget de cotação de moedas -->
+                <div class="currency-widget" title="Cotação oficial USD/BRL atualizada via AwesomeAPI">
+                    Câmbio USD: <span id="currencyValue">Calculando...</span>
+                </div>
+
+                <!-- Alternador de tema -->
+                <button id="themeToggle" class="icon-btn" aria-label="Alternar tema de cores">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+
+                <!-- Lista de Desejos -->
+                <a href="favoritos.html" class="icon-btn" aria-label="Ver lista de desejos" title="Lista de Desejos">
+                    <i data-lucide="heart"></i>
+                    <span id="wishlistBadge" class="cart-badge" style="background-color: #ef4444;">0</span>
+                </a>
+                
+                <!-- Carrinho de compras -->
+                <div class="cart-container">
+                    <button id="cartBtn" class="icon-btn" aria-label="Carrinho de compras">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cartBadge" class="cart-badge">0</span>
+                    </button>
+                    <!-- Caixa de Dropdown do Carrinho -->
+                    <div id="cartDropdown" class="cart-dropdown" role="region" aria-live="polite">
+                        <div class="cart-dropdown-header">
+                            <h4>Carrinho de Compras</h4>
+                        </div>
+                        <div id="cartItemsList" class="cart-items-list">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+                        <div class="cart-dropdown-footer">
+                            <div class="cart-total">Total: <span id="cartTotalValue">R$ 0,00</span></div>
+                            <button id="checkoutBtn" class="btn-primary" style="width: 100%; margin-top: 0.75rem;">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget de perfil do usuário -->
+                <div id="userProfile" class="user-profile" aria-label="Menu do usuário" aria-haspopup="true">
+                    <img id="userAvatar" src="" alt="Foto de perfil" class="user-avatar">
+                    <span id="userName" class="user-name">Carregando...</span>
+                    
+                    <!-- Menu dropdown do perfil -->
+                    <div id="profileDropdown" class="profile-dropdown" role="menu">
+                        <h4 id="dropdownName">Nome Usuário</h4>
+                        <p id="dropdownEmail">email@provedor.com</p>
+                        <hr>
+                        <a href="perfil.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="user" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Minha Conta</a>
+                        <a href="login.html" style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.5rem;"><i data-lucide="log-in" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Fazer Login</a>
+                        <a href="admin.html" style="font-size: 0.85rem; font-weight: 600; color: var(--accent); display: block; margin-bottom: 0.5rem;"><i data-lucide="shield" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Painel Admin</a>
+                        <hr style="margin: 0.5rem 0;">
+                        <a href="#" id="menuLogoutBtn" style="font-size: 0.85rem; font-weight: 600; color: #ef4444; display: block;"><i data-lucide="log-out" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.25rem;"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-barra de Navegação Principal -->
+    <div class="sub-bar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="loja.html" class="nav-link">Loja / Produtos</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="contato.html" class="nav-link active">Fale Conosco</a>
+        </nav>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main style="margin: 3rem auto; max-width: var(--max-width); padding: 0 2rem;">
+        <section aria-labelledby="contato-title">
+            <h1 id="contato-title" class="section-title" style="text-align: left; margin-bottom: 2rem;">Fale Conosco <span>&bull;</span></h1>
+            
+            <!-- Grid de Contato -->
+            <div class="contact-grid">
+                
+                <!-- Formulário de Mensagem -->
+                <article class="contact-form-card">
+                    <h2>Envie sua Mensagem</h2>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Preencha os campos abaixo e entraremos em contato em até 24 horas úteis.</p>
+                    
+                    <form action="#" method="POST" id="contactForm" class="contact-form" novalidate>
+                        <!-- Campo Nome -->
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo (mínimo 3 caracteres)" required>
+                            <span class="error-message" id="nomeError" aria-live="polite"></span>
+                        </div>
+                        
+                        <!-- Campo E-mail -->
+                        <div class="form-group">
+                            <label for="email">E-mail Corporativo</label>
+                            <input type="email" id="email" name="email" placeholder="exemplo@empresa.com" required>
+                            <span class="error-message" id="emailError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Campo Assunto (Select Customizado) -->
+                        <div class="form-group">
+                            <label for="assunto">Assunto</label>
+                            <div class="custom-select-container" id="customSelect">
+                                <div class="select-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+                                    <span class="selected-value">Selecione o motivo do contato</span>
+                                    <i data-lucide="chevron-down"></i>
+                                </div>
+                                <div class="select-options" role="listbox">
+                                    <div class="select-option" role="option" data-value="suporte">Suporte Técnico</div>
+                                    <div class="select-option" role="option" data-value="vendas">Dúvidas sobre Vendas</div>
+                                    <div class="select-option" role="option" data-value="parcerias">Parcerias Comerciais</div>
+                                    <div class="select-option" role="option" data-value="outros">Outros Assuntos</div>
+                                </div>
+                                <!-- Input real oculto para submissão -->
+                                <input type="hidden" id="assunto" name="assunto" required>
+                            </div>
+                            <span class="error-message" id="assuntoError" aria-live="polite"></span>
+                        </div>
+                        
+                        <!-- Campo Mensagem -->
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva detalhadamente sua solicitação..." required></textarea>
+                            <span class="error-message" id="mensagemError" aria-live="polite"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn-buy" style="width: 100%; justify-content: center; padding: 1rem;">Enviar Mensagem</button>
+                    </form>
+                </article>
+
+                <!-- Informações de Atendimento -->
+                <aside class="contact-info-card">
+                    <h2>Canais de Atendimento</h2>
+                    
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                        <div class="info-text">
+                            <h3>Nossa Sede</h3>
+                            <p>Av. Paulista, 1000 - Bela Vista</p>
+                            <p>São Paulo - SP, CEP 01310-100</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="phone"></i></div>
+                        <div class="info-text">
+                            <h3>Telefones</h3>
+                            <p>Capitais: 4004-9000</p>
+                            <p>Demais Regiões: 0800-726-0000</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="mail"></i></div>
+                        <div class="info-text">
+                            <h3>E-mail</h3>
+                            <p>atendimento@techstore.com.br</p>
+                            <p>imprensa@techstore.com.br</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i data-lucide="clock"></i></div>
+                        <div class="info-text">
+                            <h3>Horário de Funcionamento</h3>
+                            <p>Segunda a Sexta: 08:00 às 18:00</p>
+                            <p>Sábado: 09:00 às 13:00</p>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- Brands Carousel Slider -->
+        <section class="brands-section" aria-label="Nossos Parceiros">
+            <div class="brands-carousel-container">
+                <div class="brands-track" id="brandsTrack">
+                    <div class="brand-logo">Apple</div>
+                    <div class="brand-logo">Samsung</div>
+                    <div class="brand-logo">Sony</div>
+                    <div class="brand-logo">Intel</div>
+                    <div class="brand-logo">Nike</div>
+                    <div class="brand-logo">Puma</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal overlay para Quick View e tabelas -->
+    <div id="modalOverlay" class="modal-overlay" aria-modal="true" role="dialog">
+        <div id="modalContainer" class="modal-container">
+            <!-- Injetado dinamicamente via JS -->
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; <span id="currentYear"></span> TechStore API. Todos os direitos reservados. Desenvolvido por <a href="https://wbprojectsdesign.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline; font-weight: 600;">William Brito</a>.</p>
+        <p><small>Consumindo Fake Store API, RandomUser API e AwesomeAPI (Câmbio comercial USD/BRL).</small></p>
+    </footer>
+
+    <!-- Container de notificações Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>
