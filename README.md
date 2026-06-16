@@ -142,7 +142,7 @@ Como todos os projetos foram desenvolvidos utilizando tecnologias web nativas (V
 
 Conforme as diretrizes avaliativas, o vídeo de apresentação de 3 a 5 minutos contendo a explicação da estrutura HTML/CSS, o comportamento dinâmico em JavaScript, o consumo de APIs e os pilares de Clean Code aplicados está disponível no link abaixo:
 
-*   👉 **[Link para o Vídeo de Apresentação no YouTube (Não Listado)]()**
+*   👉 **[Link para o Vídeo de Apresentação no YouTube (Não Listado)](https://youtu.be/tofCGMRzvbg/)**
 
 ---
 
